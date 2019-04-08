@@ -54,6 +54,7 @@ app.get('/users', function (req, res) {
 
 app.post('/users', function (req, res) {
     const body = req.body
+    body.id = users.length
     users.push(body)
     res.send('Got a POST request at /user')
 })

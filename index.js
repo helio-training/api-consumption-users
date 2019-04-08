@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+var cors = require('cors')
 require('dotenv').config();
 const app = express()
 const port = process.env.PORT || 5005
@@ -34,6 +35,8 @@ let users = [
 app.use(express.static('public'))
 
 app.use(bodyParser.json())
+
+app.use(cors())
 
 app.get('/', function (req, res) {
     res.send('Hello, Class!')

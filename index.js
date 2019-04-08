@@ -4,12 +4,39 @@ require('dotenv').config();
 const app = express()
 const port = process.env.PORT || 5005
 
+let users = [
+    {
+        "id": 1,
+        "name": "Tyler"
+    },
+    {
+        "id": 2,
+        "name": "Wesley"
+    },
+    {
+        "id": 3,
+        "name": "David"
+    },
+    {
+        "id": 4,
+        "name": "Matt"
+    },
+    {
+        "id": 5,
+        "name": "Weston"
+    },
+    {
+        "id": 6,
+        "name": "Amy"
+    }
+]
+
 app.use(express.static('public'))
 
 app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
-    res.send('Hello World')
+    res.send('Hello, Class!')
 })
 
 app.post('/', function (req, res) {
@@ -18,21 +45,26 @@ app.post('/', function (req, res) {
     res.send(body)
 })
 
-app.get('/user', function (req, res) {
-    const turkey = {};
-    console.log(turkey.fly())
-    res.send('Got a GET request at /user')
+app.get('/users', function (req, res) {
+    res.send(users)
 })
 
-app.post('/user', function (req, res) {
+app.post('/users', function (req, res) {
+    const body = req.body
+    users.push(body)
     res.send('Got a POST request at /user')
 })
 
-app.put('/user', function (req, res) {
+app.put('/users', function (req, res) {
+    const body = req.body
+    const index = users.findIndex((ele) => ele.id === body.id)
+    users[index] = body
     res.send('Got a PUT request at /user')
 })
 
-app.delete('/user', function (req, res) {
+app.delete('/users', function (req, res) {
+    const body = req.body
+    users = users.filter((ele) => ele.id !== body.id)
     res.send('Got a DELETE request at /user')
 })
 

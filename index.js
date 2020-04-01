@@ -74,7 +74,7 @@ app.put('/users', function (req, res) {
     const foundIndex = users.findIndex((ele) => ele.id === id);
     let results;
     if (foundIndex != -1) {
-        users[foundIndex] = rest;
+        users[foundIndex] = req.body;
         results = users[foundIndex];
     } else {
         users.push(req.body);
@@ -89,7 +89,7 @@ app.patch('/users', function (req, res) {
     const foundIndex = users.findIndex((ele) => ele.id === id);
     let results;
     if (foundIndex){
-        users[foundIndex] = rest;
+        users[foundIndex] = req.body;
         results = users[foundIndex];
     } else {
         results = `ID ${id} NOT FOUND`;

@@ -5,11 +5,11 @@ require('dotenv').config();
 const app = express()
 const port = process.env.PORT || 5005
 
-let index = 6
+let index = 8
 let users = [
     {
         "id": 1,
-        "name": "Tyler"
+        "name": "Danny"
     },
     {
         "id": 2,
@@ -17,7 +17,7 @@ let users = [
     },
     {
         "id": 3,
-        "name": "David"
+        "name": "Ben"
     },
     {
         "id": 4,
@@ -30,6 +30,14 @@ let users = [
     {
         "id": 6,
         "name": "Amy"
+    },
+    {
+        "id": 7,
+        "name": "Tim"
+    },
+    {
+        "id": 8,
+        "name": "Mike"
     }
 ]
 
@@ -62,10 +70,31 @@ app.post('/users', function (req, res) {
 })
 
 app.put('/users', function (req, res) {
-    const body = req.body
-    const index = users.findIndex((ele) => ele.id === body.id)
-    users[index] = body
-    res.send('Got a PUT request at /user')
+    const { id, ...rest } = body;
+    const index = users.findIndex((ele) => ele.id === id);
+    let results;
+    if (index) {
+        users[index] = rest;
+        results = users[index];
+    } else {
+        users.push(rest);
+        results = users[users.length - 1];
+    }
+    res.send(results);
+})
+
+app.patch('/users', function (req, res) {
+    const { id, ...rest } = body;
+    const index = users.findIndex((ele) => ele.id === id);
+    let results;
+    if(index){
+        const {id, ...rest} = body;
+        users[index] = rest;
+        results = users[index];
+    } else {
+        results = `ID ${id} NOT FOUND`;
+    }
+    res.send(results);
 })
 
 app.delete('/users', function (req, res) {

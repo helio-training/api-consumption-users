@@ -70,7 +70,7 @@ app.post('/users', function (req, res) {
 })
 
 app.put('/users', function (req, res) {
-    const { id, ...rest } = body;
+    const { id, ...rest } = req.body;
     const index = users.findIndex((ele) => ele.id === id);
     let results;
     if (index) {
@@ -84,7 +84,7 @@ app.put('/users', function (req, res) {
 })
 
 app.patch('/users', function (req, res) {
-    const { id, ...rest } = body;
+    const { id, ...rest } = req.body;
     const index = users.findIndex((ele) => ele.id === id);
     let results;
     if(index){

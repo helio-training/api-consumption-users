@@ -73,7 +73,7 @@ app.put('/users', function (req, res) {
     const { id, ...rest } = req.body;
     const index = users.findIndex((ele) => ele.id === id);
     let results;
-    if (index) {
+    if (index != -1) {
         users[index] = rest;
         results = users[index];
     } else {

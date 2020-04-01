@@ -89,7 +89,6 @@ app.patch('/users', function (req, res) {
     const foundIndex = users.findIndex((ele) => ele.id === id);
     let results;
     if (foundIndex){
-        const {id, ...rest} = body;
         users[foundIndex] = rest;
         results = users[foundIndex];
     } else {

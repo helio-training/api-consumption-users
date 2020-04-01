@@ -77,7 +77,7 @@ app.put('/users', function (req, res) {
         users[index] = rest;
         results = users[index];
     } else {
-        users.push(rest);
+        users.push(req.body);
         results = users[users.length - 1];
     }
     res.send(results);

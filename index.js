@@ -65,7 +65,7 @@ app.post('/users', function (req, res) {
     const body = req.body
     body.id = ++index
     users.push(body)
-    res.send( { msg: 'Got a POST request at /user' } )
+    res.send( users[users.length - 1] )
     // res.send('Got a POST request at /user')
 })
 

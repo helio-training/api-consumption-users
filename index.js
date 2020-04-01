@@ -71,13 +71,14 @@ app.post('/users', function (req, res) {
 
 app.put('/users', function (req, res) {
     const { id, ...rest } = req.body;
-    const index = users.findIndex((ele) => ele.id === id);
+    const foundIndex = users.findIndex((ele) => ele.id === id);
     let results;
-    if (index != -1) {
-        users[index] = rest;
-        results = users[index];
+    if (foundIndex != -1) {
+        users[foundIndex] = rest;
+        results = users[foundIndex];
     } else {
         users.push(req.body);
+        index++;
         results = users[users.length - 1];
     }
     res.send(results);
@@ -85,12 +86,12 @@ app.put('/users', function (req, res) {
 
 app.patch('/users', function (req, res) {
     const { id, ...rest } = req.body;
-    const index = users.findIndex((ele) => ele.id === id);
+    const foundIndex = users.findIndex((ele) => ele.id === id);
     let results;
-    if(index){
+    if (foundIndex){
         const {id, ...rest} = body;
-        users[index] = rest;
-        results = users[index];
+        users[foundIndex] = rest;
+        results = users[foundIndex];
     } else {
         results = `ID ${id} NOT FOUND`;
     }

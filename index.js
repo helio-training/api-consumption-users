@@ -103,9 +103,21 @@ app.patch('/users/:id', function (req, res) {
     res.send(results);
 })
 
-app.delete('/users/:d', function (req, res) {
-    users = users.filter((ele) => ele.id !== req.params.id)
-    res.send('Got a DELETE request at /user')
+app.delete('/users/:id', function (req, res) {
+    const initialLength = users.length;
+    let deletedUser;
+    users = users.filter((ele) => {
+        if (ele.id !== req.params.id){
+            return true;
+        } else {
+            deletedUser = ele;
+            return false;
+        }
+    })
+    if(users.length === initialLength){
+        res.send('Nothing Deleted');
+    }
+    res.send(deletedUser);
 })
 
 app.use(function (req, res, next) {

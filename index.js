@@ -9,35 +9,43 @@ let index = 8
 let users = [
     {
         "id": 1,
-        "name": "Danny"
+        "name": "Danny",
+        "age": 30
     },
     {
         "id": 2,
-        "name": "Wesley"
+        "name": "Wesley",
+        "age": 62
     },
     {
         "id": 3,
-        "name": "Ben"
+        "name": "Ben",
+        "age": 52
     },
     {
         "id": 4,
-        "name": "Matt"
+        "name": "Matt",
+        "age": 45
     },
     {
         "id": 5,
-        "name": "Weston"
+        "name": "Weston",
+        "age": 40
     },
     {
         "id": 6,
-        "name": "Amy"
+        "name": "Amy",
+        "age": 35
     },
     {
         "id": 7,
-        "name": "Tim"
+        "name": "Tim",
+        "age": 52
     },
     {
         "id": 8,
-        "name": "Mike"
+        "name": "Mike",
+        "age": 36
     }
 ]
 
@@ -69,9 +77,8 @@ app.post('/users', function (req, res) {
     // res.send('Got a POST request at /user')
 })
 
-app.put('/users', function (req, res) {
-    const { id, ...rest } = req.body;
-    const foundIndex = users.findIndex((ele) => ele.id === id);
+app.put('/users/:id', function (req, res) {
+    const foundIndex = users.findIndex((ele) => ele.id === req.params.id);
     let results;
     if (foundIndex != -1) {
         users[foundIndex] = req.body;
@@ -84,9 +91,8 @@ app.put('/users', function (req, res) {
     res.send(results);
 })
 
-app.patch('/users', function (req, res) {
-    const { id, ...rest } = req.body;
-    const foundIndex = users.findIndex((ele) => ele.id === id);
+app.patch('/users/:id', function (req, res) {
+    const foundIndex = users.findIndex((ele) => ele.id === req.params.id);
     let results;
     if (foundIndex){
         users[foundIndex] = req.body;
@@ -97,9 +103,8 @@ app.patch('/users', function (req, res) {
     res.send(results);
 })
 
-app.delete('/users', function (req, res) {
-    const body = req.body
-    users = users.filter((ele) => ele.id !== body.id)
+app.delete('/users/:d', function (req, res) {
+    users = users.filter((ele) => ele.id !== req.params.id)
     res.send('Got a DELETE request at /user')
 })
 

@@ -107,7 +107,7 @@ app.delete('/users/:id', function (req, res) {
     const initialLength = users.length;
     let deletedUser;
     users = users.filter((ele) => {
-        if (ele.id !== req.params.id){
+        if (ele.id !== parseInt(req.params.id)){
             return true;
         } else {
             deletedUser = ele;
